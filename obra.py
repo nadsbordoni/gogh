@@ -1,24 +1,40 @@
-# Essa classe é responsável por criar um tipo obra. Esse tipo obra tem algumas caracteristicas especificas.
-class Obra:
-    # Init é obrigatorio em class.
-    def __init__(self, titulo, descricao, preco, categoria):
-        self.titulo = titulo
-        self.descricao = descricao
-        self.preco = preco
-        self.categoria = categoria
+obras = [
+    {"titulo": "Noite Estrelada", "artista": "Van Gogh", "preco": 250.00, "nota": None},
+    {"titulo": "Girassóis", "artista": "Van Gogh", "preco": 180.00, "nota": None},
+    {"titulo": "O Grito", "artista": "Edvard Munch", "preco": 300.00, "nota": None},
+    {"titulo": "A Persistência da Memória", "artista": "Dalí", "preco": 275.00, "nota": None}
+]
 
-    def __str__(self):
-        return f"Título: {self.titulo}, Descrição: {self.descricao}, Preço: {self.preco}, Categoria: {self.categoria}"
+def mostrar_galeria():
+    print("\n" + "═" * 50)
+    print("GALERIA DE ARTE".center(50))
+    print("═" * 50 + "\n")
+    
+    for i, obra in enumerate(obras, 1):
+        print(f" {obra['titulo'].upper()}")
+        print(f" Artista: {obra['artista']}")
+        print(f" Preço: R${obra['preco']:.2f}")
+        if obra['nota'] is not None:
+            print(f" Sua avaliação: {obra['nota']}/10")
+        print("\n" + "─" * 45)
 
-    # Essa função é caso a pessoa queira fazer um edit em obra, colocar novo nome, ou valor ou tudo mais.
-    def atualizar_obra(self, novo_titulo=None, nova_descricao=None, novo_preco=None, nova_categoria=None):
-        if novo_titulo and novo_titulo != self.titulo:
-            self.titulo = novo_titulo
-        if nova_descricao and nova_descricao != self.descricao:
-            self.descricao = nova_descricao
-        if novo_preco and novo_preco != self.preco:
-            self.preco = novo_preco
-        if nova_categoria and nova_categoria != self.categoria:
-            self.categoria = nova_categoria
+def avaliar_obras():
+    print("\nAVALIE AS OBRAS (0-10):\n")
+    for obra in obras:
+        while True:
+            try:
+                nota = float(input(f'Qual a sua nota para "{obra["titulo"]}"?: '))
+                if 0 <= nota <= 10:
+                    obra['nota'] = nota
+                    break
+                print("Digite um valor entre 0 e 10")
+            except ValueError:
+                print("Por favor, digite apenas números")
 
-        print(f"Obra '{self.titulo}' atualizada com sucesso!")
+
+mostrar_galeria()
+avaliar_obras()
+print("\n" + "═" * 50)
+print("OBRIGADO POR VISITAR NOSSA GALERIA!".center(50))
+print("═" * 50 + "\n")
+mostrar_galeria()
