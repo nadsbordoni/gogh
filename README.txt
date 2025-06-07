@@ -19,15 +19,15 @@ Além disso, o Gogh busca democratizar o acesso à arte, proporcionando um ambie
 - Nádia Bordoni
 
 ## Como Executar
-
-1. Fazer o passo a passo quando tiver o menu
+Temos duas opções para executar o projeto.
+1. Com o arquivo executável que encontra-se em nosso site https://sites.google.com/cesar.school/gogh
+2. Clonando o projeto e rodando o arquivo menu.py
 
 ## Linguagens e Estruturas Utilizadas
 - **Linguagem**: Python
 
 - **Estruturas**:
-
-    - Arquivos .py contendo a lógica principal para a gestão de usuários, artistas, obras e pagamentos.
-    - Utilização de funções para manipulação de dados, como CRUD (Create, Read, Update, Delete).
-    - Estruturas de Dados: Listas, dicionários e tuplas para armazenar e organizar informações de artistas e suas obras.
-
+    - O projeto foi estruturado com base na separação de responsabilidades, distribuindo a lógica em múltiplos arquivos `.py`, como `funcoes_usuario.py`, `funcoes_artista.py`, `funcoes_pagamento.py`, entre outros. 
+    - A aplicação utiliza programação orientada a objetos, com classes como `Artista`, `Obra`, `Carrinho`, `Galeria` e `Usuário`, permitindo uma organização clara dos dados e comportamentos. 
+    - Foram empregadas estruturas de dados fundamentais, como listas para armazenar artistas, usuários e obras, além de tuplas para informações imutáveis. 
+    - A lógica inclui operações CRUD para manipulação dos dados, garantindo um fluxo dinâmico e funcional. Essa estrutura promove manutenção facilitada, escalabilidade e reutilização de código no projeto.
