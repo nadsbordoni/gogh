@@ -1,40 +1,31 @@
-obras = [
-    {"titulo": "Noite Estrelada", "artista": "Van Gogh", "preco": 250.00, "nota": None},
-    {"titulo": "Girassóis", "artista": "Van Gogh", "preco": 180.00, "nota": None},
-    {"titulo": "O Grito", "artista": "Edvard Munch", "preco": 300.00, "nota": None},
-    {"titulo": "A Persistência da Memória", "artista": "Dalí", "preco": 275.00, "nota": None}
-]
+class Obra:
+    id_counter = 1
 
-def mostrar_galeria():
-    print("\n" + "═" * 50)
-    print("GALERIA DE ARTE".center(50))
-    print("═" * 50 + "\n")
-    
-    for i, obra in enumerate(obras, 1):
-        print(f" {obra['titulo'].upper()}")
-        print(f" Artista: {obra['artista']}")
-        print(f" Preço: R${obra['preco']:.2f}")
-        if obra['nota'] is not None:
-            print(f" Sua avaliação: {obra['nota']}/10")
-        print("\n" + "─" * 45)
+    def __init__(self, titulo, artista, preco, descricao, categoria, variacoes=None, nota=None):
+        self.id = Obra.id_counter
+        Obra.id_counter += 1
 
-def avaliar_obras():
-    print("\nAVALIE AS OBRAS (0-10):\n")
-    for obra in obras:
-        while True:
-            try:
-                nota = float(input(f'Qual a sua nota para "{obra["titulo"]}"?: '))
-                if 0 <= nota <= 10:
-                    obra['nota'] = nota
-                    break
-                print("Digite um valor entre 0 e 10")
-            except ValueError:
-                print("Por favor, digite apenas números")
+        self.titulo = titulo
+        self.artista = artista
+        self.preco = preco
+        self.descricao = descricao
+        self.categoria = categoria
+        self.variacoes = variacoes or []
+        self.nota = nota
 
+    def __str__(self):
+        variacoes_str = ", ".join(self.variacoes) if self.variacoes else "Nenhuma"
+        return (
+            f"Obra: {self.titulo} (ID: {self.id})\n"
+            f"Artista: {self.artista}\n"
+            f"Preço: R${self.preco:.2f}\n"
+            f"Categoria: {self.categoria}\n"
+            f"Descrição: {self.descricao}\n"
+            f"Variações: {variacoes_str}"
+        )
 
-mostrar_galeria()
-avaliar_obras()
-print("\n" + "═" * 50)
-print("OBRIGADO POR VISITAR NOSSA GALERIA!".center(50))
-print("═" * 50 + "\n")
-mostrar_galeria()
+    def avaliar(self, nota):
+        if 0 <= nota <= 10:
+            self.nota = nota
+        else:
+            raise ValueError("A nota deve estar entre 0 e 10.")

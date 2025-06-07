@@ -1,18 +1,40 @@
 from obra import Obra
 from artista import Artista
 
+def criar_obra(artista):
+    if not isinstance(artista, Artista):
+        print("Erro: O artista informado não é válido.")
+        return
 
-# Função para criar obra
-# Lembrando que ele usa a função .adicionar_obra porque a gente criou essa função em outro arquivo (no artista.py). É tipo um append.
-# Aqui ele faz duas checagens. Primeiro ele checa se artista é um objeto do tipo artista, se for ele tenta. Se não for ele já diz que o artista não é valido.
-# No segundo erro realmente não deu pra criar a obra.
-def criar_obra(artista, titulo, descricao, preco, categoria):
+    print("\n--- Cadastro de Nova Obra ---")
+
+    titulo = input("Título da obra: ")
+    descricao = input("Descrição da obra: ")
+
+    while True:
+        try:
+            preco = float(input("Preço da obra (R$): "))
+            break
+        except ValueError:
+            print("Por favor, digite um número válido para o preço.")
+
+    categoria = input("Categoria da obra: ")
+    
+    variacoes_input = input("Variações (cores/tamanhos etc., separadas por vírgula): ")
+    variacoes = [v.strip() for v in variacoes_input.split(",")] if variacoes_input else []
+
     try:
-        if isinstance(artista, Artista):  # Verifica se o artista é uma instância da classe Artista
-            obra = Obra(titulo, descricao, preco, categoria)
-            artista.adicionar_obra(obra)  # Adiciona a obra ao artista
-            print(f"Obra '{titulo}' adicionada ao artista {artista.nome}.")
-        else:
-            print("Erro: O artista informado não é válido.")
+        nova_obra = Obra(
+            titulo=titulo,
+            artista=artista,
+            preco=preco,
+            descricao=descricao,
+            categoria=categoria,
+            variacoes=variacoes
+        )
+        artista.adicionar_obra(nova_obra)
+        print(f"\n✅ Obra '{titulo}' adicionada ao artista {artista.nome} com sucesso!\n")
+        return nova_obra
     except Exception as e:
         print(f"Erro ao criar obra: {e}")
+        return None

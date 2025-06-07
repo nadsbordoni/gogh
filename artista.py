@@ -1,25 +1,41 @@
 class Artista:
-    # É obrigatório ter um init nas classes. O init vai inicializar cada uma dessas variaveis que a classe tem, de forma a essa classe poder ser reutilizada.
-    def __init__(self, nome, tipo_arte, bio, redes_sociais):
+    def __init__(self, nome, idade, local, descricao, tipos_obra, email, senha):
         self.nome = nome
-        self.tipo_arte = tipo_arte
-        self.bio = bio
-        self.redes_sociais = redes_sociais
+        self.idade = idade
+        self.local = local
+        self.descricao = descricao
+        self.tipos_obra = tipos_obra
+        self.email = email
+        self.senha = senha
         self.obras = []
 
-    # essa função adiciona uma nova obra dentro da array obras.
     def adicionar_obra(self, obra):
         self.obras.append(obra)
 
-    # Basicamente vai converter um objeto em uma string, tipo um print formatado.
-    def __str__(self):
-        return f"Nome: {self.nome}, Tipo de Arte: {self.tipo_arte}, Redes Sociais: {self.redes_sociais}"
-
-    # função que perpassa a cada um dos objetos da array e printa.
-    # Se a array tiver objetos, ele printa. Se não ele não tenta pra não quebrar o codigo.
     def exibir_obras(self):
         if self.obras:
+            print(f"\nObras disponíveis de {self.nome}:")
             for obra in self.obras:
                 print(obra)
         else:
-            print("Este artista ainda não tem obras cadastradas.")
+            print(f"{self.nome} ainda não tem obras cadastradas.")
+
+    def apagar_todas_obras(self):
+        confirmacao = input(f"Tem certeza que deseja apagar TODAS as obras de {self.nome}? (s/n): ").lower()
+        if confirmacao == 's':
+            self.obras.clear()
+            print("🗑️ Todas as obras foram removidas com sucesso.")
+        else:
+            print("❌ Ação cancelada. Nenhuma obra foi removida.")
+
+    def __str__(self):
+        tipos = ", ".join(self.tipos_obra)
+        return (
+            f"Artista: {self.nome}\n"
+            f"Idade: {self.idade}\n"
+            f"Local: {self.local}\n"
+            f"Email: {self.email}\n"
+            f"Descrição: {self.descricao}\n"
+            f"Tipos de Obra: {tipos}\n"
+            f"Total de Obras: {len(self.obras)}"
+        )
